@@ -102,6 +102,7 @@ jobs:
         id: image_build
         uses: docker/build-push-action@v4
         with:
+          provenance: false
           pull: true
           push: false
           outputs: |
@@ -129,7 +130,6 @@ jobs:
       - name: "${{ matrix.component.name }} -- Scan docker image for vulnerabilities"
         uses: aquasecurity/trivy-action@0.8.0
         with:
-          provenance: false
           input: ${{ matrix.component.name }}-arch.tar
           exit-code: "0"
           ignore-unfixed: true
